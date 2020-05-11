@@ -19,6 +19,7 @@ public:
 class AutoInMemoryRepository: public CrudRepository<Wagen*>
 {
 public:
+	AutoInMemoryRepository();
 	vector<Wagen*>autos;
 	Wagen* findOne(int id);
 	vector<Wagen*> findAll();

@@ -5,9 +5,10 @@
 class ui
 {
 private:
-	AutoController cont;
+	AutoController* cont;
 public:
 	ui();
+	~ui();
 	void menu();
 	void run();
 };

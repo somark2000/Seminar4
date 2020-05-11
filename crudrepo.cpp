@@ -1,5 +1,10 @@
 #include "crudrepo.h"
 
+AutoInMemoryRepository::AutoInMemoryRepository()
+{
+
+}
+
 Wagen* AutoInMemoryRepository::findOne(int id)            //Auto* ... return nullptr;
 {
 	//Wagen a;

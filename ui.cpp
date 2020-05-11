@@ -5,7 +5,12 @@ using namespace std;
 
 ui::ui()
 {
-	cont = AutoController();
+	cont = AutoController::ret_instanta();
+}
+
+ui::~ui()
+{
+	delete cont;
 }
 
 void ui::menu()
@@ -15,14 +20,16 @@ void ui::menu()
 	cout << "\t 2. Display all cars\n";
 	cout << "\t 3. Save a new car\n";
 	cout << "\t 4. Update an existing car\n";
-	cout << "\t 5.Delete an existing car\n";
-	cout << "\t 6. Exit\n";
+	cout << "\t 5. Delete an existing car\n";
+	cout << "\t 6. Sort existing cars\n";
+	cout << "\t 7. Exit\n";
 }
 
 void ui::run()
 {
 	while (true)
 	{
+		menu();
 		cout << "Your option: ";
 		int op;
 		cin >> op;
@@ -33,7 +40,7 @@ void ui::run()
 			cout << "The ID you are searching for: ";
 			int id;
 			cin >> id;
-			Wagen* a = cont.findAutoById(id);
+			Wagen* a = cont->findAutoById(id);
 			if (a == nullptr) cout << "Car not listed\n";
 			else cout << a->getID() << ' ' << a->getMarke() << ' ' << a->getModell() << '\n';
 			break;
@@ -41,7 +48,7 @@ void ui::run()
 		case 2:
 		{
 			cout << "All our cars\n";
-			vector<Wagen*> v = cont.findAll();
+			vector<Wagen*> v = cont->findAll();
 			for(int i=0;i<v.size();++i)
 				cout << v[i]->getID() << ' ' << v[i]->getMarke() << ' ' << v[i]->getModell() << '\n';
 			break;
@@ -58,7 +65,7 @@ void ui::run()
 			cout << "Modell: ";
 			cin >> modell;
 			Wagen* a =new Wagen(id, mark, modell);
-			if (cont.saveAuto(a) == nullptr) cout << "Save successfull\n";
+			if (cont->saveAuto(a) == nullptr) cout << "Save successfull\n";
 			else cout<< "Save unsuccessfull\n";
 			break;
 		}
@@ -74,7 +81,7 @@ void ui::run()
 			cout << "New modell: ";
 			cin >> modell;
 			Wagen* a =new Wagen(id, mark, modell);
-			if (cont.updateAuto(a) == nullptr) cout << "Update successfull\n";
+			if (cont->updateAuto(a) == nullptr) cout << "Update successfull\n";
 			else cout << "Update unsuccessfull\n";
 			break;
 		}
@@ -84,8 +91,13 @@ void ui::run()
 			int id;
 			cout << "ID: ";
 			cin >> id;
-			if (cont.deleteAuto(id) == nullptr) cout << "Delete successfull\n";
+			if (cont->deleteAuto(id) == nullptr) cout << "Delete successfull\n";
 			else cout << "Delete unsuccessfull\n";
+			break;
+		}
+		case 6:
+		{
+			cont->sort_autos();
 			break;
 		}
 		default:

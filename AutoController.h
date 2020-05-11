@@ -5,15 +5,18 @@
 
 class AutoController
 {
-	friend class AutoInMemoryRepository;
 public:
 	AutoInMemoryRepository repo;
-	AutoController();
-	~AutoController();
+	//~AutoController();
 	Wagen* findAutoById(int id);
 	vector<Wagen*> findAll();
 	Wagen* saveAuto(Wagen* a);
 	Wagen* updateAuto(Wagen* a);
 	Wagen* deleteAuto(int id);
+	void sort_autos();
+	static AutoController* ret_instanta();
+private:
+	AutoController();
+	static AutoController *instanta;
 };
 
